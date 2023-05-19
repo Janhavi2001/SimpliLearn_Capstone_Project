@@ -1,5 +1,7 @@
 package com.example.ServerSide.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +26,17 @@ public class UserController {
 	public String addUser(@RequestBody User user) {
 		userRepository.save(user);
 		return "User has successfully Signed Up";
+	}
+	
+	@PostMapping("signin")
+	public String verifyUser(@RequestBody User user) {
+		List<User> list = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		if (list.isEmpty()) {
+			return "User does not exist Please Signup to continue";
+		} else {
+			
+			return "welcome to the dashboard";
+		}
 	}
  
 }
