@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import MovieService from '../services/MovieService'
+import NavbarUser from './NavbarUser';
+import { Link } from 'react-router-dom';
 
 export default class ListMovies extends Component {
     
@@ -16,7 +18,9 @@ export default class ListMovies extends Component {
   }
   render() {
     return (
-      <div className="my-3">
+      <>
+      <NavbarUser/>
+      <div className="my-3 r">
         <h2 className="text-center">Movies List</h2>
         <div className="row">
           <table className="table table-striped table-bordered">
@@ -42,6 +46,7 @@ export default class ListMovies extends Component {
                   <td>{movie.genere}</td>
                   <td>{movie.date_time}</td>
                   <td>{movie.ticketprice}</td>
+                  <td><Link to="/userdashboard/cart"><button type="submit" className="btn btn-dark">Add to Cart</button></Link></td>
                 </tr>
               )
             }
@@ -49,6 +54,7 @@ export default class ListMovies extends Component {
           </table>
         </div>
       </div>
+      </>
     )
   }
 }

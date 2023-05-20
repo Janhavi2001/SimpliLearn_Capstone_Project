@@ -9,28 +9,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ServerSide.entity.User;
-import com.example.ServerSide.repository.UserRepository;
+import com.example.ServerSide.entity.Admin;
+import com.example.ServerSide.repository.AdminRepository;
+
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
-@RequestMapping("/api/v1/user/")
-public class UserController {
+@RequestMapping("/api/v1/admin/")
+public class AdminController {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private AdminRepository adminRepository;
 	
 	
 	
 	@PostMapping("save")
-	public String addUser(@RequestBody User user) {
-		userRepository.save(user);
-		return "User has successfully Signed Up";
+	public String addAdmin(@RequestBody Admin admin) {
+		adminRepository.save(admin);
+		return "Admin has successfully Signed Up";
 	}
 	
 	@PostMapping("signin")
-	public boolean verifyUser(@RequestBody User user) {
-		List<User> list = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+	public boolean verifyUser(@RequestBody Admin admin) {
+		List<Admin> list = adminRepository.findByUsernameAndPassword(admin.getUsername(), admin.getPassword());
 		if (list.isEmpty()) {
 			return false;
 		} else {
