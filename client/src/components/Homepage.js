@@ -91,12 +91,12 @@ export default function Homepage() {
                 </div>
                 <div className="d-flex gap-3">
                  
-                  <button type="submit" className="btn btn-primary mt-1 " onClick={(e)=>{userLogin(e)}}>
+                  <button type="submit" className="btn btn-primary mt-2 " onClick={(e)=>{userLogin(e)}}>
                     SignIn
                   </button>
                  
                   <Link className="navbar-brand" to="/signupuser">
-                    <button type="submit" className="btn btn-success ">
+                    <button type="submit" className="btn btn-success  ">
                       SignUp
                     </button>
                   </Link>

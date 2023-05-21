@@ -11,7 +11,8 @@ import RomanticMovies from "../components/RomanticMovies";
 import ComedyMovies from "../components/ComedyMovies";
 import SearchByName from "../components/SearchByName";
 import MovieCart from "../components/MovieCart";
-import AdminDashboard from "../pages/AdminDashboard";
+import AdminDashboard from "../components/AdminDashboard";
+import EditMovieForm from "../components/EditMovieForm";
 
 export default function AppRoutes() {
   return (
@@ -36,6 +37,7 @@ export default function AppRoutes() {
       />
       <Route exact path="/userdashboard/cart" element={<MovieCart />} />
       <Route exact path="/admindashboard" element={<AdminDashboard />} />
+      <Route exact path="/editmovieform" element={<EditMovieForm />} />
     </Routes>
   );
 }

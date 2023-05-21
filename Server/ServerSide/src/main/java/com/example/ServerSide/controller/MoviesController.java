@@ -1,11 +1,14 @@
 package com.example.ServerSide.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,5 +46,18 @@ public class MoviesController {
 	@GetMapping("/{name}")
 	public Movies getMovies(@PathVariable("name") String name){
 		return moviesRepository.findByName(name);
+	}
+	
+	@PutMapping("/{name}")
+	public String editMovies(@PathVariable("name") String name, @RequestBody Movies movie) {
+		Movies updatedMovies=moviesRepository.findByName(name);
+		updatedMovies.setName(movie.getName());
+		updatedMovies.setDescription(movie.getDescription());
+		updatedMovies.setLanguage(movie.getLanguage());
+		updatedMovies.setGenere(movie.getGenere());
+		updatedMovies.setDate_time(movie.getDate_time());
+		updatedMovies.setTicketprice(movie.getTicketprice());
+		moviesRepository.save(updatedMovies);
+		return "Update";
 	}
 }
