@@ -44,11 +44,7 @@ export default function NavbarAdmin() {
                     List Movies
                   </Link>
                 </li>
-                <li className="nav-item rounded-0 rounded-right rounded-bottom">
-                  <Link className="nav-link" to="/admindashboard">
-                    Edit Movies
-                  </Link>
-                </li>
+              
               </ul>
             </div>
           </div>

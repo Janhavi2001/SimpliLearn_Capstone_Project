@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import MovieService from '../services/MovieService'
 import NavbarUser from './NavbarUser';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default class ListMovies extends Component {
     
   constructor(props){
     super(props)
     this.state={
-        movies:[]
+        movies:[],
     }
   }
   componentDidMount(){
@@ -16,6 +17,43 @@ export default class ListMovies extends Component {
       this.setState({movies: res.data});
     });
   }
+
+   getMovieDetails = (e) => {
+    e.preventDefault();
+
+    var name=(e.target.parentElement.parentElement.firstChild.innerText);
+    var allMovies=this.state.movies;
+    allMovies.map((movie)=>{
+      if(movie.name===name){
+        axios.post("http://localhost:8080/api/v1/cart/addtoCart", movie).then(()=>{alert("Movie Added to Cart")}).catch(()=>{alert("Movie could not be added to cart")});
+      }
+    })
+    
+
+  };
+
+   addToCart = async () => {
+    const movieData = {
+      name: name,
+      description: description,
+      language: language,
+      genere: genere,
+      date_time: date_time,
+      ticketprice: ticketprice,
+    };
+
+    console.log(movieData);
+    await axios
+      .post(`http://localhost:8080/api/v1/movies/${movieToEdit}`, movieData)
+      .then((response) => {
+        setStateUpdate(stateUpdate + 1);
+        alert("Moive updated successfully");
+      })
+      .catch((error) => {
+        alert("Error occured while updating");
+      });
+  };
+
   render() {
     return (
       <>
@@ -46,7 +84,7 @@ export default class ListMovies extends Component {
                   <td>{movie.genere}</td>
                   <td>{movie.date_time}</td>
                   <td>{movie.ticketprice}</td>
-                  <td><Link to="/userdashboard/cart"><button type="submit" className="btn btn-dark">Add to Cart</button></Link></td>
+                  <td><button type="submit" className="btn btn-dark"  onClick={(e) => this.getMovieDetails(e)}>Add to Cart</button></td>
                 </tr>
               )
             }

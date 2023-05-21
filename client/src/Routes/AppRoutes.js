@@ -13,6 +13,7 @@ import SearchByName from "../components/SearchByName";
 import MovieCart from "../components/MovieCart";
 import AdminDashboard from "../components/AdminDashboard";
 import EditMovieForm from "../components/EditMovieForm";
+import PaymentSuccess from "../components/PaymentSuccess";
 
 export default function AppRoutes() {
   return (
@@ -38,6 +39,7 @@ export default function AppRoutes() {
       <Route exact path="/userdashboard/cart" element={<MovieCart />} />
       <Route exact path="/admindashboard" element={<AdminDashboard />} />
       <Route exact path="/editmovieform" element={<EditMovieForm />} />
+      <Route exact path="/userdashboard/successpage" element={<PaymentSuccess/>} />
     </Routes>
   );
 }

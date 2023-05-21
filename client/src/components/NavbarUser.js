@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -8,14 +8,25 @@ export default function NavbarUser() {
   const [searchedMovie, setSearchedMovie] = useState(null);
   const navigate = useNavigate();
 
-
-  const getMovies = async(e) => {
-   e.preventDefault();
-   const response =await axios.get(`http://localhost:8080/api/v1/movies/${name}`);
-   const resdata=await response.data;     
-   navigate("/userdashboard/searchedmovie", { state: { movie:resdata} });
+  const getMovies = async (e) => {
+    e.preventDefault();
+    const response = await axios.get(
+      `http://localhost:8080/api/v1/movies/${name}`
+    );
+    const resdata = await response.data;
+    navigate("/userdashboard/searchedmovie", { state: { movie: resdata } });
   };
 
+  const logoutUser = async (e) => {
+    e.preventDefault();
+    await axios
+      .delete(`http://localhost:8080/api/v1/cart/deleteAll`)
+      .then(() => {
+        alert("Logged Out From Dashboard");
+      })
+
+    navigate("/");
+  };
 
   return (
     <div>
@@ -113,12 +124,12 @@ export default function NavbarUser() {
                   </ul>
                 </li>
                 <li className="nav-item rounded-0 rounded-right rounded-bottom">
-                  <a className="nav-link" href="#">
-                    Cart
-                  </a>
+                  <Link className="nav-link" to="/userdashboard/cart">
+                    Go To Cart
+                  </Link>
                 </li>
               </ul>
-              <form className="d-flex mt-3" role="search" >
+              <form className="d-flex mt-3" role="search">
                 <input
                   className="form-control me-2"
                   type="search"
@@ -129,11 +140,22 @@ export default function NavbarUser() {
                 <button
                   className="btn btn-success"
                   type="submit"
-                  onClick={(e)=>{getMovies(e)}}
+                  onClick={(e) => {
+                    getMovies(e);
+                  }}
                 >
                   Search
                 </button>
               </form>
+              <button
+                type="button"
+                className="btn btn-danger my-5"
+                onClick={(e) => {
+                  logoutUser(e);
+                }}
+              >
+                Logout
+              </button>
             </div>
           </div>
         </div>

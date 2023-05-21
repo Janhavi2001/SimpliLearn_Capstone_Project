@@ -6,6 +6,7 @@ const MOVIE_CRIME_BASE_URL="http://localhost:8080/api/v1/movies/listCrime"
 const MOVIE_ROMANTIC_BASE_URL="http://localhost:8080/api/v1/movies/listRomantic"
 const MOVIE_COMEDY_BASE_URL="http://localhost:8080/api/v1/movies/listComedy"
 const MOVIE_SEARCHED="http://localhost:8080/api/v1/movies/{name}";
+const MOVIE_CART="http://localhost:8080/api/v1/cart/listAll"
 class MovieService{
 
     getMovies(){
@@ -25,6 +26,9 @@ class MovieService{
     }
     getSearch(){
         return axios.get(MOVIE_SEARCHED);
+    }
+    getCartMovies(){
+        return axios.get(MOVIE_CART);
     }
 }
 
